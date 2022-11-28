@@ -1,14 +1,13 @@
 ﻿namespace Assets.Scripts
 {
     [System.Serializable]
-    internal class PlayerBestScore
+    public class PlayerBestScore
     {
-        public int score;
-        private ScoreReader scoreReader;
+        public int Score;
 
-        public PlayerBestScore()
+        public PlayerBestScore(ScoreReader scoreReader)
         {
-            score = scoreReader.BestScore;
+            Score = scoreReader.BestScore;
         }
     }
 }

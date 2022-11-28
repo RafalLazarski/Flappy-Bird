@@ -1,22 +1,21 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
-    internal static class SaveRecords
+    public static class SaveRecords
     {
         private static string path = Path.Combine(Application.persistentDataPath + "bestRecord.flappy");
 
-        public static void SaveRecord(PlayerBestScore score)
+        public static void SaveRecord(PlayerBestScore playerBestScore)
         {
             BinaryFormatter formatter = new BinaryFormatter();
 
             using (FileStream stream = new FileStream(path, FileMode.Create))
             {
-                PlayerBestScore playerBestScore = new PlayerBestScore();
-
-                formatter.Serialize(stream, playerBestScore);
+                formatter.Serialize(stream, playerBestScore.Score);
                 stream.Close();
             }
         }
