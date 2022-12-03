@@ -7,7 +7,7 @@ namespace Assets.Scripts
 {
     public static class SaveRecords
     {
-        private static string path = Path.Combine(Application.persistentDataPath + "bestRecord.flappy");
+        private static string path = Path.Combine(Application.persistentDataPath + "/bestRecord.flappy");
 
         public static void SaveRecord(PlayerBestScore playerBestScore)
         {

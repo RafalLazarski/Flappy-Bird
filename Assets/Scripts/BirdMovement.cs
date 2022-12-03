@@ -6,6 +6,7 @@ public class BirdMovement : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D Bird;
     [SerializeField] private float SpeedJump;
+    [SerializeField] private AudioSource jumpSound;
     private float JumpTeleportRange = 5.5f;
 
     public void Jump()
@@ -13,6 +14,7 @@ public class BirdMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Bird.velocity = new Vector2(0, SpeedJump);
+            jumpSound.Play();
         }
 
         if (Bird.position.y < -JumpTeleportRange)

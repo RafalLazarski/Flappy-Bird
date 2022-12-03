@@ -8,19 +8,30 @@ public class GameController : MonoBehaviour
     private BirdMovement bird;
     private bool IsGameOver = false;
 
-    [SerializeField]
-    private UIController interfaceController;
+    [SerializeField] private AudioSource gameOverSound;
+    [SerializeField] private AudioSource backgroundSound;
+    [SerializeField] private UIController interfaceController;
 
 
     void Start()
     {
         bird = GetComponent<BirdMovement>();
+        backgroundSound.Play();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         TimeController.PauseGame();
         IsGameOver = true;
+    }
+
+    IEnumerator sceneLoader()
+    {
+        gameOverSound.Play();
+
+        yield return new WaitForSecondsRealtime(2);
+        TimeController.RestartGame();
+        interfaceController.ShowMenu(true);
     }
 
     void Update()
@@ -42,8 +53,10 @@ public class GameController : MonoBehaviour
         else
         {
             IsGameOver = false;
-            TimeController.RestartGame();
-            interfaceController.ShowMenu(true);
+
+            //TimeController.RestartGame();
+            //interfaceController.ShowMenu(true);
+            StartCoroutine(sceneLoader());
         }
         
 
